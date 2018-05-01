@@ -29,7 +29,7 @@ public class RandomGuessPlayer implements Player
 
 
     public Guess guess() {
-
+    	// Guess
         // placeholder, replace
         return new Guess(Guess.GuessType.Person, "", "Placeholder");
     } // end of guess()
