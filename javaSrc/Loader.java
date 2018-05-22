@@ -49,7 +49,7 @@ public class Loader {
             /* Sets key and value in HashMap */
             allAttributes.put(tokens[0], attributes);
             
-            attributes.clear();
+            attributes = new ArrayList<>();
         }
     }
     

@@ -26,14 +26,13 @@ public class RandomGuessPlayer implements Player
      *    the "throws IOException" method specification, but make sure your
      *    implementation exits gracefully if an IOException is thrown.
      */
-    public RandomGuessPlayer(String gameFilename, String chosenName)
-        throws IOException
+    public RandomGuessPlayer(String gameFilename, String chosenName) throws IOException
     {
 
         Loader loader = new Loader(gameFilename);
 
         pAttributes = loader.getAllAttributes();
-
+        
         charList = loader.getCharacters();
         for(Character character : charList){
             if(character.getName().equals(chosenName)) {
