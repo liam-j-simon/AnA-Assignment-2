@@ -64,6 +64,7 @@ public class RandomGuessPlayer implements Player
             }while(valueSize == 0);
             //get random attribute within value
             int attNum = rand.nextInt(valueSize);
+            //get specific attibute
             String specificAttribute = value.get(attNum );
             value.remove(specificAttribute);
 
@@ -89,17 +90,14 @@ public class RandomGuessPlayer implements Player
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
-
-
         if(charList.size() ==1){
             return true;
         }
 
-        //if its true
         if(answer){
-
+            //if target character has the attribute
             ListIterator<Character> character = charList.listIterator();
-
+            //loop and remove any character that doesnt have the attribute
             while(character.hasNext()) {
                 if(!character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
                     character.remove();
@@ -109,9 +107,9 @@ public class RandomGuessPlayer implements Player
 
         }
         else{
-
+            //if target doesnt have attribute
             ListIterator<Character> character = charList.listIterator();
-
+            //loop and remove any character that has the attribute
             while(character.hasNext()) {
                 if(character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
                     character.remove();
