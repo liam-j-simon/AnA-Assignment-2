@@ -17,7 +17,7 @@ public class Loader {
 	}
 	
 	public void loadCharacters() {
-	
+		System.out.println("test");
 	}
 	
 	public Collection<Character> getCharacters() {
