@@ -13,6 +13,7 @@ public class RandomGuessPlayer implements Player
 {
     private Collection<Character> charList;
     private HashMap<String,ArrayList<String>> pAttributes;
+    private Character chosenChar;
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -28,9 +29,19 @@ public class RandomGuessPlayer implements Player
     public RandomGuessPlayer(String gameFilename, String chosenName)
         throws IOException
     {
+
         Loader loader = new Loader(gameFilename);
-        charList = loader.getCharList();
+
         pAttributes = loader.getPlayerAttributes();
+
+        charList = loader.getCharList();
+        for(Character character : charList){
+            if(character.getName().equals(chosenName));
+            chosenChar = character;
+            charList.remove(character);
+        }
+
+
     } // end of RandomGuessPlayer()
 
 
@@ -58,8 +69,13 @@ public class RandomGuessPlayer implements Player
 
     public boolean answer(Guess currGuess) {
 
-        // placeholder, replace
-        return false;
+        if(chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     } // end of answer()
 
 

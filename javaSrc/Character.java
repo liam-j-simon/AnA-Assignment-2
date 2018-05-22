@@ -24,6 +24,10 @@ public class Character {
 
     }
 
+    public HashMap<String,String> getAttributes(){
+        return attributes;
+    }
+
     public void sortMap() {
         Iterator it = attributes.entrySet().iterator();
         while (((Iterator) it).hasNext()) {
