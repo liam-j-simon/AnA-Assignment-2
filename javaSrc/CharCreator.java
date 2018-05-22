@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CharCreator {
+public class Character {
     private String hairLength;
     private String glasses;
     private String facialHair;
@@ -16,7 +16,7 @@ public class CharCreator {
     private String name;
     private HashMap<String, String> attributes;
 
-    public CharCreator(String name, HashMap<String, String> attributes) {
+    public Character(String name, HashMap<String, String> attributes) {
         this.name = name;
         this.attributes = attributes;
 
