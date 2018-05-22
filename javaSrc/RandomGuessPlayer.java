@@ -34,21 +34,20 @@ public class RandomGuessPlayer implements Player
     public Guess guess() {
         // Guess
         //get an array
-        List<String> keysAsArray = new ArrayList<String>(pAttributes.keySet());
+        List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
         //new random
         Random rand = new Random();
         ArrayList<String> attributeList = pAttributes.get(keysAsArray.get(rand.nextInt(keysAsArray.size())));
-        String specificAttribute = attributeList.get(rand.nextInt(attributeList.size()));
         // placeholder, replace
         //get random key
         String key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
         //get value with key
-        ArrayList<String> temp = pAttributes.get(key);
+        ArrayList<String> value = pAttributes.get(key);
         //get random attribute within value
-        int attNum = rand.nextInt(temp.size());
-        //String specificAttribute = temp.get(attNum);
+        int attNum = rand.nextInt(value.size());
+        String specificAttribute = value.get(attNum);
         // remove from attribute pool
-        temp.remove(attNum);
+        value.remove(attNum);
         return new Guess(Guess.GuessType.Attribute, key, specificAttribute);
     } // end of guess()
 
