@@ -38,7 +38,6 @@ public class RandomGuessPlayer implements Player
         for(Character character : charList){
             if(character.getName().equals(chosenName)) {
                 chosenChar = character;
-                charList.remove(character);
             }
         }
 
