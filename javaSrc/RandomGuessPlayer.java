@@ -64,7 +64,7 @@ public class RandomGuessPlayer implements Player
             }while(valueSize == 0);
             //get random attribute within value
             int attNum = rand.nextInt(valueSize);
-            //get specific attibute
+            //get specific attribute
             String specificAttribute = value.get(attNum );
             value.remove(specificAttribute);
 
