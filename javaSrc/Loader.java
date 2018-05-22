@@ -71,7 +71,7 @@ public class Loader {
                 /* If single token, set name */
                 if (tokens.length == 1) {
                     charName = tokens[0];
-                    /* Store the attribute in HashMap */
+                /* Store the attribute in HashMap */
                 } else {
                     playerAttributes.put(tokens[0], tokens[1]);
                 }
@@ -81,6 +81,8 @@ public class Loader {
                 playerAttributes = new HashMap<>();
             }
         }
+        /* Adds the final player */
+        characters.add(new Character(charName, playerAttributes));
     }
     
     public List<Character> getCharacters() {
