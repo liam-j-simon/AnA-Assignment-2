@@ -87,7 +87,7 @@ public class Loader {
 		}
 	}
 	
-	public Collection<Character> getCharacters() {
+	public List<Character> getCharacters() {
 		return characters;
 	}
 	
