@@ -82,6 +82,19 @@ public class RandomGuessPlayer implements Player
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
         // placeholder, replace
+        for (Character character : charList) {
+            if(answer){
+                if(!chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())){
+                    charList.remove(character);
+                }
+            }
+            else{
+                if(chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())) {
+                    charList.remove(character);
+                }
+            }
+        }
+
         return true;
     } // end of receiveAnswer()
 
