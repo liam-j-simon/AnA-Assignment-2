@@ -1,19 +1,26 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
 public class Loader {
 	
-	String gameFinename;
+	String gameFilename;
 	Collection<Character> characters;
 	HashMap<String, ArrayList<String>> attributes;
 	
 	public Loader(String gameFilename) {
-		this.gameFinename = gameFilename;
+		this.gameFilename = gameFilename;
 	}
 	
 	public void loadAttributes() {
-	
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(gameFilename));
+		} catch (IOException e) {
+		
+		}
 	}
 	
 	public void loadCharacters() {
