@@ -31,78 +31,7 @@ public class Character {
     public String getName() {
         return name;
     }
-//    public void sortMap() {
-//        Iterator it = attributes.entrySet().iterator();
-//        while (((Iterator) it).hasNext()) {
-//            Map.Entry pair = (Map.Entry) it.next();
-//            switch (pair.getKey().toString()) {
-//                case "hairLength":
-//                    hairLength = pair.getValue().toString();
-//                    break;
-//                case "glasses":
-//                    glasses = pair.getValue().toString();
-//                    break;
-//                case "facialHair":
-//                    facialHair = pair.getValue().toString();
-//                    break;
-//                case "eyeColour":
-//                    eyeColour = pair.getValue().toString();
-//                    break;
-//                case "pimples":
-//                    pimples = pair.getValue().toString();
-//                    break;
-//                case "hat":
-//                    hat = pair.getValue().toString();
-//                    break;
-//                case "hairColour":
-//                    hairColor = pair.getValue().toString();
-//                    break;
-//                case "noseShape":
-//                    noseShape = pair.getValue().toString();
-//                    break;
-//                case "faceShape":
-//                    faceShape = pair.getValue().toString();
-//                    break;
-//
-//            }
-//        }
-//
-//    }
-//    public String getHairLength() {
-//        return hairLength;
-//    }
-//
-//    public String getFacialHair() {
-//        return facialHair;
-//    }
-//
-//    public String getGlasses() {
-//        return glasses;
-//    }
-//
-//    public String getEyeColour() {
-//        return eyeColour;
-//    }
-//
-//    public String getPimples() {
-//        return pimples;
-//    }
-//
-//    public String getHat() {
-//        return hat;
-//    }
-//
-//    public String getHairColor() {
-//        return hairColor;
-//    }
-//
-//    public String getNoseShape() {
-//        return noseShape;
-//    }
-//
-//    public String getFaceShape() {
-//        return faceShape;
-//    }
+
 
 
 }
