@@ -41,27 +41,32 @@ public class RandomGuessPlayer implements Player
         }
 
 
+
     } // end of RandomGuessPlayer()
 
 
     public Guess guess() {
         // Guess
-        //get an array
+        //check array size
         if(charList.size() >1) {
             List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
             //new random
             Random rand = new Random();
-            //ArrayList<String> attributeList = pAttributes.get(keysAsArray.get(rand.nextInt(keysAsArray.size())));
-            // placeholder, replace
-            //get random key
-            String key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
-            //get value with key
-            List<String> value = pAttributes.get(key);
+            String key;
+            List<String> value;
+            int valueSize;
+            do{
+                //get random key
+                key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
+                //get value array with key
+                value = pAttributes.get(key);
+                valueSize = value.size();
+            }while(valueSize == 0);
             //get random attribute within value
-            int attNum = rand.nextInt(value.size());
-            String specificAttribute = value.get(attNum);
-            // remove from attribute pool
-            value.remove(attNum);
+            int attNum = rand.nextInt(valueSize);
+            String specificAttribute = value.get(attNum );
+            value.remove(specificAttribute);
+
             return new Guess(Guess.GuessType.Attribute, key, specificAttribute);
         }
         else{
@@ -79,37 +84,45 @@ public class RandomGuessPlayer implements Player
         else {
             return true;
         }
-
-
-
     } // end of answer()
 
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
 
-        if(answer && chosenChar.getName().equals(currGuess.getValue())){
+
+        if(charList.size() ==1){
             return true;
         }
-        for (Character character : charList) {
-            //if its true
-            if(answer){
-                //remove all that dont have that attribute
-                if(!chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())){
-                    charList.remove(character);
-                    return false;
-                }
-            }
-            else{
-                //else all that have the attribute
-                if(chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())) {
-                    charList.remove(character);
-                    return false;
-                }
-            }
-        }
 
-        return false;
+        //if its true
+        if(answer){
+
+            ListIterator<Character> character = charList.listIterator();
+
+            while(character.hasNext()) {
+                if(!character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
+                    character.remove();
+                }
+            }
+            return false;
+
+        }
+        else{
+
+            ListIterator<Character> character = charList.listIterator();
+
+            while(character.hasNext()) {
+                if(character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
+                    character.remove();
+                }
+
+            }
+
+            return false;
+
+        }
+        //return false;
     } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer
