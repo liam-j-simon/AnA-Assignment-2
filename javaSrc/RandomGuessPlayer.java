@@ -51,7 +51,7 @@ public class RandomGuessPlayer implements Player
         List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
         //new random
         Random rand = new Random();
-        ArrayList<String> attributeList = pAttributes.get(keysAsArray.get(rand.nextInt(keysAsArray.size())));
+        //ArrayList<String> attributeList = pAttributes.get(keysAsArray.get(rand.nextInt(keysAsArray.size())));
         // placeholder, replace
         //get random key
         String key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
@@ -68,7 +68,7 @@ public class RandomGuessPlayer implements Player
 
 
     public boolean answer(Guess currGuess) {
-
+        //if the chosen character has the same value as the guess then return true
         if(chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())){
             return true;
         }
@@ -81,14 +81,17 @@ public class RandomGuessPlayer implements Player
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
 
-        // placeholder, replace
+
         for (Character character : charList) {
+            //if its true
             if(answer){
+                //remove all that dont have that attribute
                 if(!chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())){
                     charList.remove(character);
                 }
             }
             else{
+                //else all that have the attribute
                 if(chosenChar.getAttributes().get(currGuess.getType()).equals(currGuess.getValue())) {
                     charList.remove(character);
                 }

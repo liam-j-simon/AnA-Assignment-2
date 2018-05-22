@@ -19,9 +19,6 @@ public class Character {
     public Character(String name, HashMap<String, String> attributes) {
         this.name = name;
         this.attributes = attributes;
-
-        //sortMap();
-
     }
 
     public HashMap<String,String> getAttributes(){
