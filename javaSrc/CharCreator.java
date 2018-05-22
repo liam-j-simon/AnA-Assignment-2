@@ -61,8 +61,6 @@ public class CharCreator {
         }
 
     }
-    public String getName(){return name;} 
-
     public String getHairLength() {
         return hairLength;
     }
