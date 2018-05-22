@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 /**
  * Random guessing player.
@@ -9,7 +10,8 @@ import java.io.*;
  */
 public class RandomGuessPlayer implements Player
 {
-    ArrayList<Character> charList
+    private ArrayList<Character> charList;
+    private HashMap<String,ArrayList<String>> pAttributes;
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
      * person.
@@ -25,14 +27,31 @@ public class RandomGuessPlayer implements Player
         throws IOException
     {
         //charList = loader.getCharList();
+        //pAttributes = loader.getPlayerAttributes
     } // end of RandomGuessPlayer()
 
 
     public Guess guess() {
-    	// Guess
+        // Guess
+        //get an array
+        List<String> keysAsArray = new ArrayList<String>(pAttributes.keySet());
+        //new random
+        Random rand = new Random();
+        ArrayList<String> attributeList = pAttributes.get(keysAsArray.get(rand.nextInt(keysAsArray.size())));
+        String specificAttribute = attributeList.get(rand.nextInt(attributeList.size()));
         // placeholder, replace
-        return new Guess(Guess.GuessType.Person, "", "Placeholder");
+        //get random key
+        String key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
+        //get value with key
+        ArrayList<String> temp = pAttributes.get(key);
+        //get random attribute within value
+        int attNum = rand.nextInt(temp.size());
+        //String specificAttribute = temp.get(attNum);
+        // remove from attribute pool
+        temp.remove(attNum);
+        return new Guess(Guess.GuessType.Attribute, key, specificAttribute);
     } // end of guess()
+
 
 
     public boolean answer(Guess currGuess) {
