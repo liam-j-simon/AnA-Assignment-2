@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class Loader {
 	
-	String gameFilename;
-	Collection<Character> characters;
-	HashMap<String, ArrayList<String>> attributes;
+	private String gameFilename;
+	private Collection<Character> characters;
+	private HashMap<String, ArrayList<String>> attributes;
 	
 	public Loader(String gameFilename) {
 		this.gameFilename = gameFilename;
@@ -27,11 +27,11 @@ public class Loader {
 
 	}
 	
-	public Collection<Character> getCharacters() {
+	public Collection<Character> getCharList() {
 		return characters;
 	}
 	
-	public HashMap<String, ArrayList<String>> getAttributes() {
+	public HashMap<String, ArrayList<String>> getPlayerAttributes() {
 		return attributes;
 	}
 }

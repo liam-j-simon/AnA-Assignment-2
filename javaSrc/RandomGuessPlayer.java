@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+
 /**
  * Random guessing player.
  * This player is for task B.
@@ -10,8 +11,9 @@ import java.util.*;
  */
 public class RandomGuessPlayer implements Player
 {
-    private ArrayList<Character> charList;
+    private Collection<Character> charList;
     private HashMap<String,ArrayList<String>> pAttributes;
+
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
      * person.
@@ -26,8 +28,9 @@ public class RandomGuessPlayer implements Player
     public RandomGuessPlayer(String gameFilename, String chosenName)
         throws IOException
     {
-        //charList = loader.getCharList();
-        //pAttributes = loader.getPlayerAttributes
+        Loader loader = new Loader(gameFilename);
+        charList = loader.getCharList();
+        pAttributes = loader.getPlayerAttributes();
     } // end of RandomGuessPlayer()
 
 
