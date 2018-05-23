@@ -28,14 +28,17 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
 
 
     public Guess guess() {
-
+        /* Number of attribute matches for remaining characters */
         int match = 0, notMatch = 0;
-        int minDifference = Math.abs(characters.size() / 2) + 1;
+        /* The difference between 'half the number of characters remaining'
+         * and the closest number of matches/not matches */
+        int minDifference = Math.abs((int) Math.ceil(characters.size() / 2.0));
+        
+        System.out.println("Char: " + characters.size());
+        System.out.println(minDifference + "\n\n");
         
         String attributeGuess = null;
         String valueGuess = null;
-        
-        boolean minFound = false;
         
         if(characters.size() > 1) {
             /* For each attribute */
@@ -75,6 +78,10 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     match = 0;
                     notMatch = 0;
                 }
+            }
+    
+            if (attributeGuess == null || valueGuess == null) {
+                System.out.println("test");
             }
             
             pAttributes.get(attributeGuess).remove(valueGuess);
