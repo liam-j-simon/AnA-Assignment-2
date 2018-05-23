@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class GuessPlayer {
    
-    /* Map of all Characters */
+    // Map of all Characters
     protected Map<String, Character> characters;
-    /* HashMap of all attributes containing a list of options */
+    // HashMap of all attributes containing a list of options
     protected Map<String,List<String>> pAttributes;
-    /* Chosen character loaded from file */
+    // Chosen character loaded from file
     protected Character chosenChar;
     
     public GuessPlayer(String gameFilename, String chosenName) throws IOException {
-        //load all charcters
+        //load all characters
         Loader loader = new Loader(gameFilename);
         //get all attributes to use
         pAttributes = loader.getAllAttributes();

@@ -8,7 +8,9 @@ import java.util.Map;
 
 public class Loader {
     
+    /* Map of all imported characters */
     private Map<String, Character> characters;
+    /* Map of Lists containing values for all attributes*/
     private Map<String, List<String>> pAttributes;
     
     public Loader(String gameFilename) throws IOException {
@@ -17,6 +19,7 @@ public class Loader {
         load(gameFilename);
     }
     
+    /* Loads the attributes then the characters */
     public void load(String gameFilename) throws IOException {
         BufferedReader in = new BufferedReader(new FileReader(gameFilename));
         loadAttributes(in);
@@ -33,7 +36,7 @@ public class Loader {
         /* While lines are left in the file */
         while ((line = in.readLine()).length() > 0) {
             attributes = new ArrayList<>();
-            /* Splits a string by white space*/
+            /* Splits a string by white space */
             tokens = line.trim().split("\\s+");
             /* Creates the ArrayList of values of an attribute */
             for (int i = 1; i < tokens.length; i++)
@@ -64,14 +67,14 @@ public class Loader {
                 } else {
                     playerAttributes.put(tokens[0], tokens[1]);
                 }
-            /* Create character */
+            /* Create Character */
             } else {
                 /* Add final attribute to last player */
                 if (nextLine == null) {
                     tokens = line.trim().split("\\s+");
                     playerAttributes.put(tokens[0], tokens[1]);
                 }
-                
+                /* Add new Character to Map */
                 characters.put(charName, new Character(charName, playerAttributes));
                 playerAttributes = new HashMap<>();
             }

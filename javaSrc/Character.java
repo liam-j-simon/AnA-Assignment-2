@@ -3,9 +3,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Character {
-
-
+    
+    /* Character name */
     private String name;
+    /* Character's attributes. Key is the attribute name. */
     private HashMap<String, String> attributes;
 
     public Character(String name, HashMap<String, String> attributes) {
@@ -20,7 +21,5 @@ public class Character {
     public String getName() {
         return name;
     }
-
-
-
+    
 }

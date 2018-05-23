@@ -27,7 +27,8 @@ public class RandomGuessPlayer extends GuessPlayer implements Player
         super(gameFilename, chosenName);
     } // end of RandomGuessPlayer()
     
-    
+    // Random guessing: Chooses a random attribute and a random
+    // attribute value to guess
     public Guess guess() {
         // Guess
         //check array size
