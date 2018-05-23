@@ -28,18 +28,18 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
 
 
     public Guess guess() {
-    
-        Map<String[], Integer> characterAttributeCount = new HashMap<>();
 
         int match = 0, notMatch = 0;
+        int minDifference = Math.abs(characters.size() / 2) + 1;
         
-        int minDifference = Math.abs(characters.size() / 2);
         String attributeGuess = null;
         String valueGuess = null;
         
+        boolean minFound = false;
+        
         if(characters.size() > 1) {
-
             /* For each attribute */
+            earlyTerminate:
             for (String attribute : pAttributes.keySet()) {
                 /* For each attribute value */
                 for (String value : pAttributes.get(attribute)) {
@@ -53,15 +53,24 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                         }
                     }
                     
-                    int differenceMatch = Math.abs((characters.size() / 2) - match);
-                    int differenceNotMatch = Math.abs((characters.size() / 2) - notMatch);
-                    int difference = differenceMatch < differenceNotMatch ? differenceMatch : differenceNotMatch;
+                    /* Compare */
+                    int difference =
+                            Math.abs((characters.size() / 2) - match) >
+                            Math.abs((characters.size() / 2) - notMatch) ?
+                            Math.abs((characters.size() / 2) - match) :
+                            Math.abs((characters.size() / 2) - notMatch);
                     
                     if (difference < minDifference) {
                         attributeGuess = attribute;
                         valueGuess = value;
                         minDifference = difference;
                     }
+                    System.out.println("Difference: " + difference);
+                    System.out.println("MinDifference: " + minDifference + "\n");
+                    
+                    /* Stop searching if minimum difference is found.*/
+                    if (difference == 0)
+                        break earlyTerminate;
                     
                     match = 0;
                     notMatch = 0;
@@ -76,45 +85,5 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     new ArrayList<>(characters.keySet()).get(0)).getName());
         }
     } // end of guess()
-    
-    
-//    public Guess guess() {
-//
-//        int count = 0, max = 0;
-//        String attributeGuess = null;
-//        String valueGuess = null;
-//
-//        if(characters.size() > 1) {
-//
-//            /* For each attribute */
-//            for (String attribute : pAttributes.keySet()) {
-//                /* For each attribute value */
-//                for (String value : pAttributes.get(attribute)) {
-//                    /* For each character */
-//                    for (Character character : characters.values()) {
-//                        /* If the characters attribute matches the value */
-//                        if (character.getAttributes().get(attribute).equals(value)) {
-//                            count++;
-//                        }
-//                    }
-//
-//                    /* Determine which attribute has the bigger impact */
-//                    if (count > max) {
-//                        attributeGuess = attribute;
-//                        valueGuess = value;
-//                        max = count;
-//                    }
-//                    count = 0;
-//                }
-//            }
-//
-//            pAttributes.get(attributeGuess).remove(valueGuess);
-//            return new Guess(Guess.GuessType.Attribute, attributeGuess, valueGuess);
-//
-//        } else {
-//            return new Guess(Guess.GuessType.Person,"", characters.get(
-//                    new ArrayList<>(characters.keySet()).get(0)).getName());
-//        }
-//    } // end of guess()
 
 } // end of class BinaryGuessPlayer
