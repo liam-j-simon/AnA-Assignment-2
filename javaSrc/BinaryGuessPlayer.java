@@ -32,9 +32,9 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
         int count = 0, max = 0;
         String attributeGuess = null;
         String valueGuess = null;
-        
+
         if(characters.size() > 1) {
-            
+
             /* For each attribute */
             for (String attribute : pAttributes.keySet()) {
                 /* For each attribute value */
@@ -46,7 +46,7 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                             count++;
                         }
                     }
-    
+
                     /* Determine which attribute has the bigger impact */
                     if (count > max) {
                         attributeGuess = attribute;
@@ -56,8 +56,10 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     count = 0;
                 }
             }
-            return new Guess(Guess.GuessType.Attribute, attributeGuess, valueGuess);
             
+            pAttributes.get(attributeGuess).remove(valueGuess);
+            return new Guess(Guess.GuessType.Attribute, attributeGuess, valueGuess);
+
         } else {
             return new Guess(Guess.GuessType.Person,"", characters.get(
                     new ArrayList<>(characters.keySet()).get(0)).getName());

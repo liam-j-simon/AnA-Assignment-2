@@ -21,7 +21,6 @@ public class GuessPlayer {
 
     }
     
-    
     public boolean answer(Guess currGuess) {
         //if the chosen character has the same value as the guess then return true
         if(currGuess.getType().equals(Guess.GuessType.Attribute)) {
@@ -32,22 +31,17 @@ public class GuessPlayer {
         }
     } // end of answer()
     
-    
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
-        
-        System.out.println("Guess: " + currGuess.toString());
-        System.out.println("answer: " + answer);
         
         if (characters.size() == 1)
             return true;
         // For each character
         for (Character character : new ArrayList<>(characters.values())) {
-            System.out.println(characters.toString());
             
             if (answer) {
                 // remove any character that doesn't have the attribute
                 if (!character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
-                    characters.remove(character.getName());
+                   characters.remove(character.getName());
                 }
             } else {
                 // remove any character that has the attribute
