@@ -11,8 +11,11 @@ import java.util.*;
  */
 public class RandomGuessPlayer implements Player
 {
-    private List<Character> charList;
-    private HashMap<String,List<String>> pAttributes;
+    /* Map of all Characters */
+    private Map<String, Character> characters;
+    /* HashMap of all attributes containing a list of options */
+    private Map<String,List<String>> pAttributes;
+    /* Chosen character loaded from file */
     private Character chosenChar;
 
     /**
@@ -26,29 +29,20 @@ public class RandomGuessPlayer implements Player
      *    the "throws IOException" method specification, but make sure your
      *    implementation exits gracefully if an IOException is thrown.
      */
-    public RandomGuessPlayer(String gameFilename, String chosenName) throws IOException
-    {
+    public RandomGuessPlayer(String gameFilename, String chosenName) throws IOException {
 
         Loader loader = new Loader(gameFilename);
-
         pAttributes = loader.getAllAttributes();
+        characters = loader.getCharacters();
+        chosenChar = characters.get(chosenName);
         
-        charList = loader.getCharacters();
-        for(Character character : charList){
-            if(character.getName().equals(chosenName)) {
-                chosenChar = character;
-            }
-        }
-
-
-
     } // end of RandomGuessPlayer()
-
-
+    
+    
     public Guess guess() {
         // Guess
         //check array size
-        if(charList.size() >1) {
+        if(characters.size() >1) {
             List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
             //new random
             Random rand = new Random();
@@ -71,7 +65,8 @@ public class RandomGuessPlayer implements Player
             return new Guess(Guess.GuessType.Attribute, key, specificAttribute);
         }
         else{
-            return new Guess(Guess.GuessType.Person,"",charList.get(0).getName());
+            return new Guess(Guess.GuessType.Person,"", characters.get(
+                    new ArrayList<>(characters.keySet()).get(0)).getName());
         }
     } // end of guess()
 
@@ -86,41 +81,60 @@ public class RandomGuessPlayer implements Player
             return true;
         }
     } // end of answer()
-
-
-	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-
-        if(charList.size() ==1){
+    
+    public boolean receiveAnswer(Guess currGuess, boolean answer) {
+        
+        if (characters.size() == 1)
             return true;
-        }
-
-        if(answer){
-            //if target character has the attribute
-            ListIterator<Character> character = charList.listIterator();
-            //loop and remove any character that doesnt have the attribute
-            while(character.hasNext()) {
-                if(!character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
-                    character.remove();
+        /* For each character */
+        for (Character character : new ArrayList<>(characters.values())) {
+            if (answer) {
+                // remove any character that doesn't have the attribute
+                if (!character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
+                    characters.remove(character.getName());
+                }
+            } else {
+                // remove any character that has the attribute
+                if (character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
+                    characters.remove(character.getName());
                 }
             }
-            return false;
-
         }
-        else{
-            //if target doesnt have attribute
-            ListIterator<Character> character = charList.listIterator();
-            //loop and remove any character that has the attribute
-            while(character.hasNext()) {
-                if(character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
-                    character.remove();
-                }
+        return false;
+    }
 
-            }
-
-            return false;
-
-        }
-        //return false;
-    } // end of receiveAnswer()
+//	public boolean receiveAnswer(Guess currGuess, boolean answer) {
+//
+//        if(characters.size() ==1){
+//            return true;
+//        }
+//
+//        if(answer){
+//            //if target character has the attribute
+//            ListIterator<Character> character = characters.listIterator();
+//            //loop and remove any character that doesnt have the attribute
+//            while(character.hasNext()) {
+//                if(!character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
+//                    character.remove();
+//                }
+//            }
+//            return false;
+//        }
+//        else{
+//            //if target doesnt have attribute
+//            ListIterator<Character> character = characters.listIterator();
+//            //loop and remove any character that has the attribute
+//            while(character.hasNext()) {
+//                if(character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
+//                    character.remove();
+//                }
+//
+//            }
+//
+//            return false;
+//
+//        }
+//        //return false;
+//    } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer

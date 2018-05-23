@@ -2,18 +2,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Loader {
     
-    private List<Character> characters;
-    private HashMap<String, List<String>> allAttributes;
+    private Map<String, Character> characters;
+    private Map<String, List<String>> pAttributes;
     
     public Loader(String gameFilename) throws IOException {
-        characters = new ArrayList<>();
-        allAttributes = new HashMap<>();
+        characters = new HashMap<>();
+        pAttributes = new HashMap<>();
         load(gameFilename);
     }
     
@@ -39,7 +39,7 @@ public class Loader {
             for (int i = 1; i < tokens.length; i++)
                 attributes.add(tokens[i]);
             /* Sets key and value in HashMap */
-            allAttributes.put(tokens[0], attributes);
+            pAttributes.put(tokens[0], attributes);
         }
     }
     
@@ -66,17 +66,23 @@ public class Loader {
                 }
             /* Create character */
             } else {
-                characters.add(new Character(charName, playerAttributes));
+                /* Add final attribute to last player */
+                if (nextLine == null) {
+                    tokens = line.trim().split("\\s+");
+                    playerAttributes.put(tokens[0], tokens[1]);
+                }
+                
+                characters.put(charName, new Character(charName, playerAttributes));
                 playerAttributes = new HashMap<>();
             }
         }
     }
     
-    public List<Character> getCharacters() {
+    public Map<String, Character> getCharacters() {
         return characters;
     }
     
-    public HashMap<String, List<String>> getAllAttributes() {
-        return allAttributes;
+    public Map<String, List<String>> getAllAttributes() {
+        return pAttributes;
     }
 }

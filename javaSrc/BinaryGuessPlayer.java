@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Binary-search based guessing player.
@@ -9,7 +11,13 @@ import java.io.*;
  */
 public class BinaryGuessPlayer implements Player
 {
-
+    /* List of all Characters each containing a HashMap of attributes*/
+    private List<Character> charList;
+    /* HashMap of all attributes containing a list of options */
+    private HashMap<String,List<String>> pAttributes;
+    /* Chosen character loaded from file */
+    private Character chosenChar;
+    
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
      * person.
@@ -21,9 +29,7 @@ public class BinaryGuessPlayer implements Player
      *    the "throws IOException" method specification, but make sure your
      *    implementation exits gracefully if an IOException is thrown.
      */
-    public BinaryGuessPlayer(String gameFilename, String chosenName)
-        throws IOException
-    {
+    public BinaryGuessPlayer(String gameFilename, String chosenName) throws IOException {
 
     } // end of BinaryGuessPlayer()
 
