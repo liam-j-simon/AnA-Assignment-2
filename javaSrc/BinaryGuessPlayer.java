@@ -60,6 +60,7 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     if (difference < minDifference) {
                         attributeGuess = attribute;
                         valueGuess = value;
+                        minDifference = difference;
                     }
                     
                     match = 0;

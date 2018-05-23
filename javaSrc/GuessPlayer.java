@@ -42,16 +42,15 @@ public class GuessPlayer {
                 // remove any character that doesn't have the attribute
                 if (!character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
                    characters.remove(character.getName());
-                  System.out.println("Remove: " + character.getName());
                 }
             } else {
                 // remove any character that has the attribute
                 if (character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
                     characters.remove(character.getName());
-                    System.out.println("Remove: " + character.getName());
                 }
             }
         }
+        System.out.println();
         return false;
     } // end of receiveAnswer()
 }
