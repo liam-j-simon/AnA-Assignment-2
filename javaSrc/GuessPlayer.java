@@ -40,11 +40,11 @@ public class GuessPlayer {
             return true;
         // For each character
         for (Character character : new ArrayList<>(characters.values())) {
-            
+
             if (answer) {
                 // remove any character that doesn't have the attribute
                 if (!character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
-                   characters.remove(character.getName());
+                    characters.remove(character.getName());
                 }
             } else {
                 // remove any character that has the attribute
@@ -53,7 +53,6 @@ public class GuessPlayer {
                 }
             }
         }
-        System.out.println();
         return false;
     } // end of receiveAnswer()
 }
