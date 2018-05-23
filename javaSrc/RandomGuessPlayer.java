@@ -41,7 +41,7 @@ public class RandomGuessPlayer extends GuessPlayer implements Player
             do{
                 //get random key
                 key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
-                //get value array with key
+                //get value list with key
                 value = pAttributes.get(key);
                 valueSize = value.size();
             }while(valueSize == 0);
