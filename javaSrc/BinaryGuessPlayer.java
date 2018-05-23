@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Binary-search based guessing player.
@@ -9,14 +8,8 @@ import java.util.List;
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the Player interface (directly or indirectly).
  */
-public class BinaryGuessPlayer implements Player
+public class BinaryGuessPlayer extends GuessPlayer implements Player
 {
-    /* List of all Characters each containing a HashMap of attributes*/
-    private List<Character> charList;
-    /* HashMap of all attributes containing a list of options */
-    private HashMap<String,List<String>> pAttributes;
-    /* Chosen character loaded from file */
-    private Character chosenChar;
     
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -30,28 +23,45 @@ public class BinaryGuessPlayer implements Player
      *    implementation exits gracefully if an IOException is thrown.
      */
     public BinaryGuessPlayer(String gameFilename, String chosenName) throws IOException {
-
+        super(gameFilename, chosenName);
     } // end of BinaryGuessPlayer()
 
 
     public Guess guess() {
-
-        // placeholder, replace
-        return new Guess(Guess.GuessType.Person, "", "Placeholder");
+        
+        int count = 0, max = 0;
+        String attributeGuess = null;
+        String valueGuess = null;
+        
+        if(characters.size() > 1) {
+            
+            /* For each attribute */
+            for (String attribute : pAttributes.keySet()) {
+                /* For each attribute value */
+                for (String value : pAttributes.get(attribute)) {
+                    /* For each character */
+                    for (Character character : characters.values()) {
+                        /* If the characters attribute matches the value */
+                        if (character.getAttributes().get(attribute).equals(value)) {
+                            count++;
+                        }
+                    }
+    
+                    /* Determine which attribute has the bigger impact */
+                    if (count > max) {
+                        attributeGuess = attribute;
+                        valueGuess = value;
+                        max = count;
+                    }
+                    count = 0;
+                }
+            }
+            return new Guess(Guess.GuessType.Attribute, attributeGuess, valueGuess);
+            
+        } else {
+            return new Guess(Guess.GuessType.Person,"", characters.get(
+                    new ArrayList<>(characters.keySet()).get(0)).getName());
+        }
     } // end of guess()
-
-
-	public boolean answer(Guess currGuess) {
-
-        // placeholder, replace
-        return false;
-    } // end of answer()
-
-
-	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-
-        // placeholder, replace
-        return true;
-    } // end of receiveAnswer()
 
 } // end of class BinaryGuessPlayer

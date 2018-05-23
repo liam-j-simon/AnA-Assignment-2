@@ -9,14 +9,8 @@ import java.util.*;
  * You may implement/extend other interfaces or classes, but ensure ultimately
  * that this class implements the Player interface (directly or indirectly).
  */
-public class RandomGuessPlayer implements Player
+public class RandomGuessPlayer extends GuessPlayer implements Player
 {
-    /* Map of all Characters */
-    private Map<String, Character> characters;
-    /* HashMap of all attributes containing a list of options */
-    private Map<String,List<String>> pAttributes;
-    /* Chosen character loaded from file */
-    private Character chosenChar;
 
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -30,12 +24,7 @@ public class RandomGuessPlayer implements Player
      *    implementation exits gracefully if an IOException is thrown.
      */
     public RandomGuessPlayer(String gameFilename, String chosenName) throws IOException {
-
-        Loader loader = new Loader(gameFilename);
-        pAttributes = loader.getAllAttributes();
-        characters = loader.getCharacters();
-        chosenChar = characters.get(chosenName);
-        
+        super(gameFilename, chosenName);
     } // end of RandomGuessPlayer()
     
     
@@ -69,72 +58,5 @@ public class RandomGuessPlayer implements Player
                     new ArrayList<>(characters.keySet()).get(0)).getName());
         }
     } // end of guess()
-
-
-
-    public boolean answer(Guess currGuess) {
-        //if the chosen character has the same value as the guess then return true
-        if(currGuess.getType().equals(Guess.GuessType.Attribute)) {
-            return chosenChar.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue());
-        }
-        else {
-            return true;
-        }
-    } // end of answer()
-    
-    public boolean receiveAnswer(Guess currGuess, boolean answer) {
-        
-        if (characters.size() == 1)
-            return true;
-        /* For each character */
-        for (Character character : new ArrayList<>(characters.values())) {
-            if (answer) {
-                // remove any character that doesn't have the attribute
-                if (!character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
-                    characters.remove(character.getName());
-                }
-            } else {
-                // remove any character that has the attribute
-                if (character.getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())) {
-                    characters.remove(character.getName());
-                }
-            }
-        }
-        return false;
-    }
-
-//	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-//
-//        if(characters.size() ==1){
-//            return true;
-//        }
-//
-//        if(answer){
-//            //if target character has the attribute
-//            ListIterator<Character> character = characters.listIterator();
-//            //loop and remove any character that doesnt have the attribute
-//            while(character.hasNext()) {
-//                if(!character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
-//                    character.remove();
-//                }
-//            }
-//            return false;
-//        }
-//        else{
-//            //if target doesnt have attribute
-//            ListIterator<Character> character = characters.listIterator();
-//            //loop and remove any character that has the attribute
-//            while(character.hasNext()) {
-//                if(character.next().getAttributes().get(currGuess.getAttribute()).equals(currGuess.getValue())){
-//                    character.remove();
-//                }
-//
-//            }
-//
-//            return false;
-//
-//        }
-//        //return false;
-//    } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer
