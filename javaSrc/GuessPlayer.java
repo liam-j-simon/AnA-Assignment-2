@@ -13,10 +13,13 @@ public class GuessPlayer {
     protected Character chosenChar;
     
     public GuessPlayer(String gameFilename, String chosenName) throws IOException {
-    
+        //load all charcters
         Loader loader = new Loader(gameFilename);
+        //get all attributes to use
         pAttributes = loader.getAllAttributes();
+        //get all characters to use
         characters = loader.getCharacters();
+        //get the character that was chosen
         chosenChar = characters.get(chosenName);
 
     }
