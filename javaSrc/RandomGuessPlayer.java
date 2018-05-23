@@ -33,25 +33,36 @@ public class RandomGuessPlayer extends GuessPlayer implements Player
         // Guess
         //check array size
         if(characters.size() >1) {
+            boolean check = false;
             List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
             //new random
             Random rand = new Random();
             String key;
             List<String> value;
-            int valueSize;
-            do{
-                //get random key
-                key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
-                //get value list with key
-                value = pAttributes.get(key);
-                valueSize = value.size();
-            }while(valueSize == 0);
-            //get random attribute within value
-            int attNum = rand.nextInt(valueSize);
-            //get specific attribute
-            String specificAttribute = value.get(attNum );
+            String specificAttribute;
+            do {
+                int valueSize;
+                //check that the attributes have
+                do {
+                    //get random key
+                    key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
+                    //get value list with key
+                    value = pAttributes.get(key);
+                    valueSize = value.size();
+                } while (valueSize == 0);
+                //get random attribute within value
+                int attNum = rand.nextInt(valueSize);
+                //get specific attribute
+                specificAttribute = value.get(attNum);
+                //check that attribute exists in players before guess
+                for (Character character : new ArrayList<>(characters.values())) {
+                    if (character.getAttributes().get(key).equals(specificAttribute)) {
+                        check = true;
+                    }
+                }
+            }while(!check);
+            //remove when guessed #machine learning
             value.remove(specificAttribute);
-
             return new Guess(Guess.GuessType.Attribute, key, specificAttribute);
         }
         else{
