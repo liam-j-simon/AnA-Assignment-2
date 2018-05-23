@@ -31,11 +31,11 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
     
         Map<String[], Integer> characterAttributeCount = new HashMap<>();
 
-        int count = 0, minDifference = Math.abs(characters.size() / 2);
+        int match = 0, notMatch = 0;
+        
+        int minDifference = Math.abs(characters.size() / 2);
         String attributeGuess = null;
         String valueGuess = null;
-        
-        int half = 0;
         
         if(characters.size() > 1) {
 
@@ -47,18 +47,23 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     for (Character character : characters.values()) {
                         /* If the characters attribute matches the value */
                         if (character.getAttributes().get(attribute).equals(value)) {
-                            count++;
+                            match++;
+                        } else {
+                            notMatch++;
                         }
                     }
                     
-                    int difference = Math.abs((characters.size() / 2) - count);
-                    /* Determine which attribute has the bigger impact */
+                    int differenceMatch = Math.abs((characters.size() / 2) - match);
+                    int differenceNotMatch = Math.abs((characters.size() / 2) - notMatch);
+                    int difference = differenceMatch < differenceNotMatch ? differenceMatch : differenceNotMatch;
                     
                     if (difference < minDifference) {
                         attributeGuess = attribute;
                         valueGuess = value;
                     }
-                    count = 0;
+                    
+                    match = 0;
+                    notMatch = 0;
                 }
             }
             
@@ -70,12 +75,6 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
                     new ArrayList<>(characters.keySet()).get(0)).getName());
         }
     } // end of guess()
-    
-    
-    
-    private void sort(List<Integer> counts, List<String[]> attributes) {
-    
-    }
     
     
 //    public Guess guess() {
