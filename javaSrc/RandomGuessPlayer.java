@@ -34,7 +34,7 @@ public class RandomGuessPlayer extends GuessPlayer implements Player
         //check array size
         if(characters.size() >1) {
             boolean check = false;
-            List<String> keysAsArray = new ArrayList<>(pAttributes.keySet());
+            List<String> keysAsArray = new ArrayList<>(cAttributes.keySet());
             //new random
             Random rand = new Random();
             String key;
@@ -47,7 +47,7 @@ public class RandomGuessPlayer extends GuessPlayer implements Player
                     //get random key
                     key = keysAsArray.get(rand.nextInt(keysAsArray.size()));
                     //get value list with key
-                    value = pAttributes.get(key);
+                    value = cAttributes.get(key);
                     valueSize = value.size();
                 } while (valueSize == 0);
                 //get random attribute within value

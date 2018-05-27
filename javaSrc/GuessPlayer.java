@@ -1,27 +1,24 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class GuessPlayer {
    
-    // Map of all Characters
+    /* Map of all Characters. Character name is the key */
     protected Map<String, Character> characters;
-    // HashMap of all attributes containing a list of options
-    protected Map<String,List<String>> pAttributes;
-    // Chosen character loaded from file
+    /* HashMap of all attributes containing a list of options */
+    protected Map<String, List<String>> cAttributes;
+    /* Chosen character loaded from file */
     protected Character chosenChar;
     
     public GuessPlayer(String gameFilename, String chosenName) throws IOException {
-        //load all characters
+        // Load all characters
         Loader loader = new Loader(gameFilename);
-        //get all attributes to use
-        pAttributes = loader.getAllAttributes();
-        //get all characters to use
+        // Get all attributes to use
+        cAttributes = loader.getAllAttributes();
+        // Get all characters to use
         characters = loader.getCharacters();
-        //get the character that was chosen
+        // Get the character that was chosen
         chosenChar = characters.get(chosenName);
-
     }
     
     public boolean answer(Guess currGuess) {
@@ -36,6 +33,7 @@ public class GuessPlayer {
     
     public boolean receiveAnswer(Guess currGuess, boolean answer) {
         
+        // Return true if there is only 1 character left
         if (characters.size() == 1)
             return true;
         // For each character

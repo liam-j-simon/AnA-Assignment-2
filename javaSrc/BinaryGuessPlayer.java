@@ -43,9 +43,9 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
         if(characters.size() > 1) {
             /* For each attribute */
             earlyTerminate:
-            for (String attribute : pAttributes.keySet()) {
+            for (String attribute : cAttributes.keySet()) {
                 /* For each attribute value remaining */
-                for (String value : pAttributes.get(attribute)) {
+                for (String value : cAttributes.get(attribute)) {
                     /* For each character remaining */
                     for (Character character : characters.values()) {
                         /* If the characters attribute matches the value */
@@ -84,7 +84,7 @@ public class BinaryGuessPlayer extends GuessPlayer implements Player
             }
             
             /* Remove the value guessed and make guess */
-            pAttributes.get(attributeGuess).remove(valueGuess);
+            cAttributes.get(attributeGuess).remove(valueGuess);
             return new Guess(Guess.GuessType.Attribute, attributeGuess, valueGuess);
         
         /* If there is 1 character remaining, guess the character */
